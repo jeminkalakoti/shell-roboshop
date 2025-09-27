@@ -34,7 +34,7 @@ VALIDATE(){ # Functions receive arguments like normal scripts
 
 ### RabbitMQ Installation Steps ###
 
-cp $SCRIPT_DIR/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
+cp $SCRIPT_DIR/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOG_FILE # Copy the repo file
 
 dnf install rabbitmq-server -y &>>$LOG_FILE # Install RabbitMQ
 VALIDATE $? "Installing RabbitMQ"    # Validate the last command
