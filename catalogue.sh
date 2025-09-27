@@ -8,7 +8,7 @@ N='\e[0m'    # No Color
 
 LOGS_FOLDER="/var/log/shell-roboshop/"
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1 ) # Extract script name without extension
-$SCRIPT_DIR=$(pwd) # Get the current working directory
+$SCRIPT_DIR=$PWD # Get the current working directory
 MONGODB_HOST="mongodb.kalakoti.fun" # MongoDB Host
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # Define log file path
 
@@ -87,9 +87,13 @@ VALIDATE $? "Adding MongoDB Repo" # Validate the last command
 
 dnf install mongodb-mongosh -y &>>$LOG_FILE # Install MongoDB Shell
 VALIDATE $? "Installing MongoDB Shell"    # Validate the last command
-
-mongosh --host $MONGODB_HOST </app/db/master-data.js &>>$LOG_FILE # Load the schema
-VALIDATE $? "Loading Schema to MongoDB"    # Validate the last command
+INDEX=$(mongosh mongodb.daws86s.fun --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')")
+if [ $INDEX -le 0 ]; then
+    mongosh --host $MONGODB_HOST </app/db/master-data.js &>>$LOG_FILE # Load the schema
+    VALIDATE $? "Loading Schema to MongoDB"    # Validate the last command
+else
+    echo -e "Schema already exists. $Y SKIPPING $N" # Print skipping message in yellow color
+fi  
 
 systemctl restart catalogue # Restart the service
 VALIDATE $? "Restarting Catalogue Service"    # Validate the last command
