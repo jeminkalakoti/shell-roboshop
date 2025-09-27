@@ -38,7 +38,7 @@ dnf module enable nodejs:20 -y &>>$LOG_FILE # Enable the nodejs 20 module
 dnf install nodejs -y &>>$LOG_FILE # Install NodeJS
 echo -e "Installing NodeJS:20 ... $G SUCCESSFUL $N"   # Print success message in green color
 
-id roboshop &>>LOG_FILE # Check if the user already exists
+id roboshop &>>$LOG_FILE # Check if the user already exists
 if [ $? -ne 0 ]; then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE # Add application user
     VALIDATE $? "Creating system User"    # Validate the last command
