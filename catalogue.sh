@@ -8,6 +8,7 @@ N='\e[0m'    # No Color
 
 LOGS_FOLDER="/var/log/shell-roboshop/"
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1 ) # Extract script name without extension
+$SCRIPT_DIR=$(pwd) # Get the current working directory
 MONGODB_HOST="mongodb.kalakoti.fun" # MongoDB Host
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # Define log file path
 
