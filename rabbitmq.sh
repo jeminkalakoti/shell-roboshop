@@ -10,6 +10,7 @@ LOGS_FOLDER="/var/log/shell-roboshop/"
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1 ) # Extract script name without extension
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # Define log file path
 START_TIME=$(date +%s) # Get the script start time
+SCRIPT_DIR=$(PWD) # Get the current working directory
 
 # -e enables the interpretation of backslash escapes
 
@@ -33,7 +34,7 @@ VALIDATE(){ # Functions receive arguments like normal scripts
 
 ### RabbitMQ Installation Steps ###
 
-vim /etc/yum.repos.d/rabbitmq.repo
+cp $SCRIPT_DIR/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
 
 dnf install rabbitmq-server -y &>>$LOG_FILE # Install RabbitMQ
 VALIDATE $? "Installing RabbitMQ"    # Validate the last command
