@@ -43,7 +43,7 @@ VALIDATE $? "Enabling NodeJS 20 module" # Validate the last command
 dnf install nodejs -y &>>$LOG_FILE # Install NodeJS
 VALIDATE $? "Installing NodeJS"    # Validate the last command
 
-id roboshop # Check if the user already exists
+id roboshop &>>LOG_FILE # Check if the user already exists
 if [ $? -ne 0 ]; then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE # Add application user
     VALIDATE $? "Creating system User"    # Validate the last command
@@ -59,6 +59,9 @@ VALIDATE $? "Downloading catalogue Application Code"    # Validate the last comm
 
 cd /app 
 VALIDATE $? "Changing Directory to /app"    # Validate the last command
+
+rm -rf /app/* # Remove any existing application code
+VALIDATE $? "Removing the existing Application Code"    # Validate the last command
 
 unzip /tmp/catalogue.zip &>>$LOG_FILE # Unzip the application code
 VALIDATE $? "Unzipping catalogue Application Code"    # Validate the last command 
