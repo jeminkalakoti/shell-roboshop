@@ -59,7 +59,7 @@ systemctl start catalogue # Start the service
 echo -e "catalogue application setup completed ... $G SUCCESSFUL $N"   # Print success message in green color
 
 cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo # Copy the repo file
-dnf install mongodb-mongosh -y aasf &>>$LOG_FILE # Install MongoDB Shell
+dnf install mongodb-mongosh -y &>>$LOG_FILE # Install MongoDB Shell
 
 INDEX=$(mongosh mongodb.kalakoti.fun --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')")
 if [ $INDEX -le 0 ]; then
