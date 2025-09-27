@@ -10,7 +10,7 @@ LOGS_FOLDER="/var/log/shell-roboshop/"
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1 ) # Extract script name without extension
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # Define log file path
 START_TIME=$(date +%s) # Get the script start time
-SCRIPT_DIR=$(PWD) # Get the current working directory
+SCRIPT_DIR=$PWD # Get the current working directory
 
 # -e enables the interpretation of backslash escapes
 
