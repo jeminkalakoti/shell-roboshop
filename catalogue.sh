@@ -8,7 +8,7 @@ N='\e[0m'    # No Color
 
 LOGS_FOLDER="/var/log/shell-roboshop/"
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1 ) # Extract script name without extension
-#$SCRIPT_DIR=$PWD # Get the current working directory
+SCRIPT_DIR=$PWD # Get the current working directory
 MONGODB_HOST="mongodb.kalakoti.fun" # MongoDB Host
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # Define log file path
 
@@ -70,7 +70,7 @@ VALIDATE $? "Unzipping catalogue Application Code"    # Validate the last comman
 npm install &>>$LOG_FILE # Download the application dependencies
 VALIDATE $? "Installing Application Dependencies"    # Validate the last command
 
-cp catalogue.service /etc/systemd/system/catalogue.service # Copy the service file
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service # Copy the service file
 VALIDATE $? "Copying Service File"    # Validate the last command
 
 systemctl daemon-reload # Reload systemd to register the service
@@ -82,7 +82,7 @@ VALIDATE $? "Enabling Catalogue Service"    # Validate the last command
 systemctl start catalogue # Start the service
 VALIDATE $? "Starting Catalogue Service"    # Validate the last command
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo # Copy the repo file
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo # Copy the repo file
 VALIDATE $? "Adding MongoDB Repo" # Validate the last command
 
 dnf install mongodb-mongosh -y &>>$LOG_FILE # Install MongoDB Shell
