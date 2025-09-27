@@ -43,10 +43,15 @@ VALIDATE $? "Enabling NodeJS 20 module" # Validate the last command
 dnf install nodejs -y &>>$LOG_FILE # Install NodeJS
 VALIDATE $? "Installing NodeJS"    # Validate the last command
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE # Add application user
-VALIDATE $? "Adding Application User"    # Validate the last command
+id roboshop # Check if the user already exists
+if [ $? -ne 0 ]; then
+    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE # Add application user
+    VALIDATE $? "Creating system User"    # Validate the last command
+else
+    echo -e "User roboshop already exists. $Y SKIPPING $N" # Print skipping message in yellow color
+fi
 
-mkdir /app # Create application directory
+mkdir -p /app #Create application directory if not exists 
 VALIDATE $? "Creating Application Directory"    # Validate the last command
 
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$LOG_FILE # Download the application code
@@ -61,7 +66,7 @@ VALIDATE $? "Unzipping catalogue Application Code"    # Validate the last comman
 npm install &>>$LOG_FILE # Download the application dependencies
 VALIDATE $? "Installing Application Dependencies"    # Validate the last command
 
-cp catalogue.service /etc/systemd/system/catalogue.service # Copy the service file
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service # Copy the service file
 VALIDATE $? "Copying Service File"    # Validate the last command
 
 systemctl daemon-reload # Reload systemd to register the service
@@ -73,7 +78,7 @@ VALIDATE $? "Enabling Catalogue Service"    # Validate the last command
 systemctl start catalogue # Start the service
 VALIDATE $? "Starting Catalogue Service"    # Validate the last command
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo # Copy the repo file
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo # Copy the repo file
 VALIDATE $? "Adding MongoDB Repo" # Validate the last command
 
 dnf install mongodb-mongosh -y &>>$LOG_FILE # Install MongoDB Shell
