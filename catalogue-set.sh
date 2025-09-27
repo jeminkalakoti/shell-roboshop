@@ -41,7 +41,6 @@ echo -e "Installing NodeJS:20 ... $G SUCCESSFUL $N"   # Print success message in
 id roboshop &>>$LOG_FILE # Check if the user already exists
 if [ $? -ne 0 ]; then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE # Add application user
-    VALIDATE $? "Creating system User"    # Validate the last command
 else
     echo -e "User roboshop already exists. $Y SKIPPING $N" # Print skipping message in yellow color
 fi
