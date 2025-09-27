@@ -46,5 +46,5 @@ VALIDATE $? "Setting MySQL Root Password"    # Validate the last command
 
 END_TIME=$(date +%s) # Get the script end time
 TOTAL_TIME=$((END_TIME - START_TIME)) # Calculate the total time taken
-echo -e "Total time taken to execute the script:$Y $TOTAL_TIME seconds $N
+echo -e "Total time taken to execute the script:$Y $TOTAL_TIME seconds $N"
 
