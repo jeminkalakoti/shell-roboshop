@@ -11,7 +11,7 @@ SCRIPT_NAME=$( echo $0 | cut -d "." -f1 ) # Extract script name without extensio
 SCRIPT_DIR=$PWD # Get the current working directory
 MONGODB_HOST="mongodb.kalakoti.fun" # MongoDB Host
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # Define log file path
-MYSQL_HOST="mysql.sh.kalakoti.fun" # MySQL Host
+MYSQL_HOST="mysql.kalakoti.fun" # MySQL Host
 
 # -e enables the interpretation of backslash escapes
 

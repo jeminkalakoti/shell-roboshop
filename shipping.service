@@ -5,7 +5,7 @@ Description=Shipping Service
 User=roboshop
 // highlight-start
 Environment=CART_ENDPOINT=cart.kalakoti.fun:8080
-Environment=DB_HOST=mysql.sh.kalakoti.fun
+Environment=DB_HOST=mysql.kalakoti.fun
 // highlight-end
 ExecStart=/bin/java -jar /app/shipping.jar
 SyslogIdentifier=shipping
