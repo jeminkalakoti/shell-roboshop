@@ -3,7 +3,7 @@
 AMI_ID="ami-09c813fb71547fc4f"
 SG_ID="sg-0a3bb5a6589ebd361"
 ZONE_ID="Z0292208N1Q9H7WGUJ5M" # replace with your ID
-DOMAIN_NAME="kalakoti.fun"
+DOMAIN_NAME="kalakoti.fun" # replace with your domain name
 
 for instance in $@  # $1 is the first argument and $@ is all the arguments
 do
