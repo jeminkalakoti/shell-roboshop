@@ -19,4 +19,4 @@ ExecStop=/bin/kill -9 $MAINPID
 SyslogIdentifier=payment
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.targetn
