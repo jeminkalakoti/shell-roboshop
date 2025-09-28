@@ -6,7 +6,7 @@ G='\e[0;32m' # Green
 Y='\e[0;33m' # Yellow
 N='\e[0m'    # No Color
 
-LOGS_FOLDER="/var/log/shell-roboshop/"
+LOGS_FOLDER="/var/log/shell-roboshop/"  # Create logs folder if not exists
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1 ) # Extract script name without extension
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # Define log file path
 START_TIME=$(date +%s) # Get the script start time
